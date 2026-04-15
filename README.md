@@ -23,7 +23,7 @@ A React frontend for a secure banking system with JWT authentication, role-based
    ```
 3. Set `VITE_API_BASE_URL` in an `.env` file or in Netlify environment variables to your production backend URL, for example:
    ```bash
-   VITE_API_BASE_URL=https://YOUR-BACKEND.onrender.com
+   VITE_API_BASE_URL=https://your-backend.onrender.com
    ```
 
 ## Netlify Deployment
