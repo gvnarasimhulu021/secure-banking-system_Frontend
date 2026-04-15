@@ -21,7 +21,10 @@ A React frontend for a secure banking system with JWT authentication, role-based
    ```bash
    npm run dev
    ```
-3. Update `VITE_API_BASE_URL` in `vite.config.js` or create an `.env` file to point to your Spring Boot backend.
+3. Set `VITE_API_BASE_URL` in an `.env` file or in Netlify environment variables to your production backend URL, for example:
+   ```bash
+   VITE_API_BASE_URL=https://YOUR-BACKEND.onrender.com
+   ```
 
 ## Netlify Deployment
 

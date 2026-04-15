@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { decodeJwt, isJwtExpired } from '../utils/jwt';
 import { getItem, removeItem, setItem } from '../utils/storage';
+import { API_BASE_URL } from './config';
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api';
 const TOKEN_KEY = 'banking_app_token';
 const PROFILE_KEY = 'banking_app_profile';
 
@@ -72,7 +72,7 @@ export function isTokenValid() {
 }
 
 export async function register(credentials) {
-    const response = await axios.post(`${API_BASE}/auth/register`, credentials, {
+    const response = await axios.post(`${API_BASE_URL}/auth/register`, credentials, {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -81,7 +81,7 @@ export async function register(credentials) {
 }
 
 export async function login(credentials) {
-    const response = await axios.post(`${API_BASE}/auth/login`, credentials, {
+    const response = await axios.post(`${API_BASE_URL}/auth/login`, credentials, {
         headers: {
             'Content-Type': 'application/json'
         }
