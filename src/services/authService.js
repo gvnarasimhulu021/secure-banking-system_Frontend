@@ -72,7 +72,7 @@ export function isTokenValid() {
 }
 
 export async function register(credentials) {
-    const response = await axios.post(`${API_BASE_URL}/auth/register`, credentials, {
+    const response = await axios.post(`${API_BASE_URL}/api/auth/register`, credentials, {
         headers: {
             'Content-Type': 'application/json'
         }
@@ -81,7 +81,7 @@ export async function register(credentials) {
 }
 
 export async function login(credentials) {
-    const response = await axios.post(`${API_BASE_URL}/auth/login`, credentials, {
+    const response = await axios.post(`${API_BASE_URL}/api/auth/login`, credentials, {
         headers: {
             'Content-Type': 'application/json'
         }
