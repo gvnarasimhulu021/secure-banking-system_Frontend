@@ -35,11 +35,7 @@ function LoginPage() {
             }
 
             saveToken(data.token);
-            const profileResponse = await api.get('/user/profile', {
-                headers: {
-                    Authorization: `Bearer ${data.token}`
-                }
-            });
+            const profileResponse = await api.get("/api/account/details");
             saveUserProfile(profileResponse.data);
 
             setToastDetails({ message: '✅ Login successful! Redirecting...', type: 'success' });

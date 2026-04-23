@@ -46,7 +46,7 @@ function RegisterPage() {
             }
 
             saveToken(response.token);
-            const profileResponse = await api.get('/user/profile');
+            const profileResponse = await api.get('/api/account/details');
             saveUserProfile(profileResponse.data);
             setShowToast(true);
 
@@ -60,7 +60,7 @@ function RegisterPage() {
                 data: err.response?.data,
                 message: err.message
             });
-            
+
             let errorMessage = 'Registration failed.';
             if (err.response?.data?.message) {
                 errorMessage = err.response.data.message;
@@ -69,7 +69,7 @@ function RegisterPage() {
             } else if (err.message) {
                 errorMessage = err.message;
             }
-            
+
             setError(errorMessage);
         } finally {
             setLoading(false);

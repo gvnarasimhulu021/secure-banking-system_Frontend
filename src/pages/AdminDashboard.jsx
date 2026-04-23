@@ -19,7 +19,7 @@ function AdminDashboard() {
         setLoading(true);
 
         try {
-            const response = await api.get('/admin/users');
+            const response = await api.get('/api/admin/users');
             setUsers(response.data || []);
         } catch (err) {
             setError(err.response?.data?.message || 'Unable to load users.');
@@ -37,7 +37,7 @@ function AdminDashboard() {
         setDeleteLoading(userId);
 
         try {
-            await api.delete(`/admin/delete?id=${userId}`);
+            await api.delete(`/api/admin/delete?id=${userId}`);
             toast.success(`User ${userEmail} deleted successfully.`);
             await fetchUsers();
         } catch (err) {

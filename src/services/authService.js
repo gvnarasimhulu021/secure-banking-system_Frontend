@@ -1,102 +1,67 @@
-import axios from 'axios';
-import { decodeJwt, isJwtExpired } from '../utils/jwt';
-import { getItem, removeItem, setItem } from '../utils/storage';
-import { API_BASE_URL } from './config';
+import axios from "axios";
+import { API_BASE_URL } from "./config";
+import { decodeJwt, isJwtExpired } from "../utils/jwt";
+import { getItem, removeItem, setItem } from "../utils/storage";
 
-const TOKEN_KEY = 'banking_app_token';
-const PROFILE_KEY = 'banking_app_profile';
+const TOKEN_KEY = "banking_app_token";
+const PROFILE_KEY = "banking_app_profile";
 
-// Clean axios instance without interceptors for auth
-const authApi = axios.create({
-    baseURL: API_BASE_URL,
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    timeout: 10000
-});
+// ================= TOKEN =================
+export const saveToken = (token) => setItem(TOKEN_KEY, token);
+export const getToken = () => getItem(TOKEN_KEY);
+export const clearToken = () => removeItem(TOKEN_KEY);
 
-const TOKEN_KEY = 'banking_app_token';
-const PROFILE_KEY = 'banking_app_profile';
-
-export function saveToken(token) {
-    setItem(TOKEN_KEY, token);
-}
-
-export function getToken() {
-    return getItem(TOKEN_KEY);
-}
-
-export function clearToken() {
-    removeItem(TOKEN_KEY);
-}
-
-export function saveUserProfile(profile) {
+// ================= PROFILE =================
+export const saveUserProfile = (profile) =>
     setItem(PROFILE_KEY, JSON.stringify(profile));
-}
 
-export function getUserProfile() {
+export const getUserProfile = () => {
     const value = getItem(PROFILE_KEY);
-    if (!value) return null;
-    try {
-        return JSON.parse(value);
-    } catch {
-        return null;
-    }
-}
+    return value ? JSON.parse(value) : null;
+};
 
-export function clearUserProfile() {
-    removeItem(PROFILE_KEY);
-}
+export const clearUserProfile = () => removeItem(PROFILE_KEY);
 
-export function logout() {
+export const logout = () => {
     clearToken();
     clearUserProfile();
-}
+};
 
-export function decodeToken(token) {
-    return decodeJwt(token);
-}
+// ================= JWT =================
+export const decodeToken = (token) => decodeJwt(token);
 
-export function getUserRole() {
+export const getUserRole = () => {
     const token = getToken();
     const decoded = decodeToken(token);
     const profile = getUserProfile();
+
     if (profile?.role) return profile.role;
     if (!decoded) return null;
-    return decoded.role || (decoded.roles ? decoded.roles[0] : null);
-}
 
-export function getUserName() {
+    return decoded.role || decoded.roles?.[0];
+};
+
+export const getUserName = () => {
     const profile = getUserProfile();
-    if (profile?.fullName) return profile.fullName;
-    if (profile?.name) return profile.name;
+    return profile?.fullName || profile?.name || 'User';
+};
 
+export const isTokenValid = () => {
     const token = getToken();
-    const decoded = decodeToken(token);
-    if (!decoded) return null;
-    return decoded.fullName || decoded.name || decoded.email || decoded.sub || null;
-}
+    return token && !isJwtExpired(token);
+};
 
-export function isTokenValid() {
-    const token = getToken();
-    if (!token) return false;
-    return !isJwtExpired(token);
-}
+// ================= AUTH APIs =================
+export const register = async (data) => {
+    const res = await axios.post(`${API_BASE_URL}/api/auth/register`, data);
+    return res.data;
+};
 
-export async function register(credentials) {
-    const response = await axios.post(`${API_BASE_URL}/api/auth/register`, credentials, {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
-    return response.data;
-}
+export const login = async (data) => {
+    const res = await axios.post(`${API_BASE_URL}/api/auth/login`, data);
 
-export async function login(credentials) {
-    const response = await axios.post(`${API_BASE_URL}/api/auth/login`, credentials, {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
-    return response.data;
-}
+    // ✅ IMPORTANT
+    saveToken(res.data.token);
+
+    return res.data;
+};

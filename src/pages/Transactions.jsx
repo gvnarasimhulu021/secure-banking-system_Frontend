@@ -14,7 +14,7 @@ function Transactions() {
             setLoading(true);
 
             try {
-                const response = await api.get('/transactions');
+                const response = await api.get('/api/transactions');
                 setTransactions(response.data || []);
             } catch (err) {
                 setError(err.response?.data?.message || 'Unable to load transactions.');
@@ -86,9 +86,9 @@ function Transactions() {
                                                 <td>
                                                     <span
                                                         className={`badge ${getTransactionColor(transaction.type)
-                                                                .includes('success')
-                                                                ? 'bg-success'
-                                                                : 'bg-danger'
+                                                            .includes('success')
+                                                            ? 'bg-success'
+                                                            : 'bg-danger'
                                                             }`}
                                                     >
                                                         {transaction.type || 'Unknown'}
