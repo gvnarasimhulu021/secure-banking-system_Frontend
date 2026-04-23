@@ -84,25 +84,19 @@ export function isTokenValid() {
 }
 
 export async function register(credentials) {
-    try {
-        console.log('📤 Registering with:', credentials);
-        const response = await authApi.post('/api/auth/register', credentials);
-        console.log('✅ Register success:', response.data);
-        return response.data;
-    } catch (error) {
-        console.error('❌ Register failed:', error.response?.status, error.response?.data || error.message);
-        throw error;
-    }
+    const response = await axios.post(`${API_BASE_URL}/api/auth/register`, credentials, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    return response.data;
 }
 
 export async function login(credentials) {
-    try {
-        console.log('📤 Logging in with:', credentials);
-        const response = await authApi.post('/api/auth/login', credentials);
-        console.log('✅ Login success:', response.data);
-        return response.data;
-    } catch (error) {
-        console.error('❌ Login failed:', error.response?.status, error.response?.data || error.message);
-        throw error;
-    }
+    const response = await axios.post(`${API_BASE_URL}/api/auth/login`, credentials, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    return response.data;
 }
