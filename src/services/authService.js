@@ -6,6 +6,18 @@ import { API_BASE_URL } from './config';
 const TOKEN_KEY = 'banking_app_token';
 const PROFILE_KEY = 'banking_app_profile';
 
+// Clean axios instance without interceptors for auth
+const authApi = axios.create({
+    baseURL: API_BASE_URL,
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    timeout: 10000
+});
+
+const TOKEN_KEY = 'banking_app_token';
+const PROFILE_KEY = 'banking_app_profile';
+
 export function saveToken(token) {
     setItem(TOKEN_KEY, token);
 }
@@ -72,19 +84,25 @@ export function isTokenValid() {
 }
 
 export async function register(credentials) {
-    const response = await axios.post(`${API_BASE_URL}/auth/register`, credentials, {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
-    return response.data;
+    try {
+        console.log('📤 Registering with:', credentials);
+        const response = await authApi.post('/api/auth/register', credentials);
+        console.log('✅ Register success:', response.data);
+        return response.data;
+    } catch (error) {
+        console.error('❌ Register failed:', error.response?.status, error.response?.data || error.message);
+        throw error;
+    }
 }
 
 export async function login(credentials) {
-    const response = await axios.post(`${API_BASE_URL}/auth/login`, credentials, {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
-    return response.data;
+    try {
+        console.log('📤 Logging in with:', credentials);
+        const response = await authApi.post('/api/auth/login', credentials);
+        console.log('✅ Login success:', response.data);
+        return response.data;
+    } catch (error) {
+        console.error('❌ Login failed:', error.response?.status, error.response?.data || error.message);
+        throw error;
+    }
 }

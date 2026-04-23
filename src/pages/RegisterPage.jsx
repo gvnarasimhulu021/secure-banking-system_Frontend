@@ -37,7 +37,9 @@ function RegisterPage() {
                 email,
                 password
             };
+            console.log('Register payload:', JSON.stringify(payload));
             const response = await registerRequest(payload);
+            console.log('Register response:', response);
 
             if (!response?.token) {
                 throw new Error('Registration succeeded but token was not returned.');
@@ -53,7 +55,22 @@ function RegisterPage() {
                 navigate(role === 'ADMIN' ? '/admin' : '/dashboard', { replace: true });
             }, 2000);
         } catch (err) {
-            setError(err.response?.data?.message || err.message || 'Registration failed.');
+            console.error('❌ Registration error:', {
+                status: err.response?.status,
+                data: err.response?.data,
+                message: err.message
+            });
+            
+            let errorMessage = 'Registration failed.';
+            if (err.response?.data?.message) {
+                errorMessage = err.response.data.message;
+            } else if (typeof err.response?.data === 'string') {
+                errorMessage = err.response.data;
+            } else if (err.message) {
+                errorMessage = err.message;
+            }
+            
+            setError(errorMessage);
         } finally {
             setLoading(false);
         }
@@ -159,7 +176,7 @@ function RegisterPage() {
                                                     type="text"
                                                     id="fullName"
                                                     className="form-control"
-                                                    placeholder="John Doe"
+                                                    placeholder="Your full name"
                                                     value={fullName}
                                                     onChange={(e) => setFullName(e.target.value)}
                                                     required
