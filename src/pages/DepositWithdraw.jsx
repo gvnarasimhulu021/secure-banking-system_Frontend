@@ -37,7 +37,7 @@ function DepositWithdraw() {
         try {
             const response = await api.post(`/api/account/deposit?amount=${parseFloat(amount)}`);
             setBalance(response.data.balance);
-            toast.success(`✅ Deposit of $${parseFloat(amount).toFixed(2)} successful!`);
+            toast.success(`✅ Deposit of ₹${parseFloat(amount).toFixed(2)} successful!`);
             setAmount('');
         } catch (err) {
             toast.error(err.response?.data?.message || 'Deposit failed.');
@@ -65,7 +65,7 @@ function DepositWithdraw() {
         try {
             const response = await api.post(`/api/account/withdraw?amount=${parseFloat(amount)}`);
             setBalance(response.data.balance);
-            toast.success(`✅ Withdrawal of $${parseFloat(amount).toFixed(2)} successful!`);
+            toast.success(`✅ Withdrawal of ₹${parseFloat(amount).toFixed(2)} successful!`);
             setAmount('');
         } catch (err) {
             toast.error(err.response?.data?.message || 'Withdrawal failed.');
@@ -83,7 +83,7 @@ function DepositWithdraw() {
         try {
             const response = await api.post(`/api/account/deposit?amount=${quickAmount}`);
             setBalance(response.data.balance);
-            toast.success(`💰 Quick deposit of $${quickAmount} successful!`);
+            toast.success(`💰 Quick deposit of ₹${quickAmount} successful!`);
             setAmount('');
         } catch (err) {
             toast.error(err.response?.data?.message || 'Deposit failed.');
@@ -106,7 +106,7 @@ function DepositWithdraw() {
         try {
             const response = await api.post(`/api/account/withdraw?amount=${quickAmount}`);
             setBalance(response.data.balance);
-            toast.success(`💸 Quick withdrawal of $${quickAmount} successful!`);
+            toast.success(`💸 Quick withdrawal of ₹${quickAmount} successful!`);
             setAmount('');
         } catch (err) {
             toast.error(err.response?.data?.message || 'Withdrawal failed.');
@@ -146,7 +146,7 @@ function DepositWithdraw() {
                                 {balance !== null ? (
                                     <>
                                         <p style={{ fontSize: '2.5rem', fontWeight: '800', color: '#27ae60', margin: '0' }}>
-                                            ${balance.toFixed(2)}
+                                            ₹{balance.toFixed(2)}
                                         </p>
                                         <small className="text-muted">Available balance</small>
                                     </>
@@ -197,7 +197,7 @@ function DepositWithdraw() {
                                                     e.target.style.boxShadow = 'none';
                                                 }}
                                             >
-                                                <span style={{ fontWeight: '600', color: '#27ae60' }}>+${amt}</span>
+                                                <span style={{ fontWeight: '600', color: '#27ae60' }}>+₹{amt}</span>
                                             </button>
                                         </div>
                                     ))}
@@ -236,7 +236,7 @@ function DepositWithdraw() {
                                                     e.target.style.boxShadow = 'none';
                                                 }}
                                             >
-                                                <span style={{ fontWeight: '600', color: '#e74c3c' }}>-${amt}</span>
+                                                <span style={{ fontWeight: '600', color: '#e74c3c' }}>-₹{amt}</span>
                                             </button>
                                         </div>
                                     ))}
@@ -253,7 +253,7 @@ function DepositWithdraw() {
                             </div>
                             <div className="card-body p-4">
                                 <div className="mb-3">
-                                    <label htmlFor="depositAmount" className="form-label">Amount ($)</label>
+                                    <label htmlFor="depositAmount" className="form-label">Amount (₹)</label>
                                     <input
                                         id="depositAmount"
                                         type="number"
@@ -287,7 +287,7 @@ function DepositWithdraw() {
                             </div>
                             <div className="card-body p-4">
                                 <div className="mb-3">
-                                    <label htmlFor="withdrawAmount" className="form-label">Amount ($)</label>
+                                    <label htmlFor="withdrawAmount" className="form-label">Amount (₹)</label>
                                     <input
                                         id="withdrawAmount"
                                         type="number"

@@ -60,7 +60,7 @@ function AccountDetails() {
                                     <div className="card-body p-4">
                                         <p className="text-muted mb-2">💰 Current Balance</p>
                                         <p style={{ fontSize: '2.5rem', fontWeight: '800', color: '#27ae60', margin: '0' }}>
-                                            {account.currency || '$'}{account.balance?.toFixed?.(2) ?? account.balance}
+                                            ₹{account.balance?.toFixed?.(2) ?? account.balance}
                                         </p>
                                         <small className="text-muted">Available funds</small>
                                     </div>

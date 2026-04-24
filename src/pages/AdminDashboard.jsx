@@ -110,7 +110,7 @@ function AdminDashboard() {
                                                     </span>
                                                 </td>
                                                 <td className="fw-600 text-success">
-                                                    ${user.balance?.toFixed(2) ?? '0.00'}
+                                                    ₹{user.balance?.toFixed(2) ?? '0.00'}
                                                 </td>
                                                 <td className="text-end">
                                                     <button

@@ -78,7 +78,7 @@ function UserDashboard() {
         try {
             const response = await api.post(`/api/account/deposit?amount=${amount}`);
             setAccount((prev) => ({ ...prev, balance: response.data.balance }));
-            toast.success(`Deposit successful: $${amount.toFixed(2)} added.`);
+            toast.success(`Deposit successful: ₹${amount.toFixed(2)} added.`);
             setDepositAmount('');
             await fetchAccount();
         } catch (err) {
@@ -106,7 +106,7 @@ function UserDashboard() {
         try {
             const response = await api.post(`/api/account/withdraw?amount=${amount}`);
             setAccount((prev) => ({ ...prev, balance: response.data.balance }));
-            toast.success(`Withdrawal successful: $${amount.toFixed(2)} withdrawn.`);
+            toast.success(`Withdrawal successful: ₹${amount.toFixed(2)} withdrawn.`);
             setWithdrawAmount('');
             await fetchAccount();
         } catch (err) {
@@ -165,7 +165,7 @@ function UserDashboard() {
         try {
             const response = await api.post(`/api/account/deposit?amount=${amount}`);
             setAccount((prev) => ({ ...prev, balance: response.data.balance }));
-            toast.success(`💰 Quick deposit of $${amount.toFixed(2)} successful!`);
+            toast.success(`💰 Quick deposit of ₹${amount.toFixed(2)} successful!`);
             setDepositAmount('');
             await fetchAccount();
             await loadDashboard();
@@ -188,7 +188,7 @@ function UserDashboard() {
         try {
             const response = await api.post(`/api/account/withdraw?amount=${amount}`);
             setAccount((prev) => ({ ...prev, balance: response.data.balance }));
-            toast.success(`💸 Quick withdrawal of $${amount.toFixed(2)} successful!`);
+            toast.success(`💸 Quick withdrawal of ₹${amount.toFixed(2)} successful!`);
             setWithdrawAmount('');
             await fetchAccount();
             await loadDashboard();
@@ -264,7 +264,7 @@ function UserDashboard() {
                             <div className="card-body p-4">
                                 <p className="text-muted mb-2">💰 Current Balance</p>
                                 <div style={{ fontSize: '3rem', fontWeight: '800', color: '#667eea', marginBottom: '10px' }}>
-                                    ${account?.balance?.toFixed(2) ?? '0.00'}
+                                    ₹{account?.balance?.toFixed(2) ?? '0.00'}
                                 </div>
                                 <p className="mb-3" style={{ color: '#666', fontSize: '0.95rem' }}>
                                     Account: {account?.accountNumber || 'N/A'}
@@ -289,7 +289,7 @@ function UserDashboard() {
                                     <div className="card-body p-3">
                                         <p className="text-muted mb-2" style={{ fontSize: '0.9rem' }}>📈 Total Deposits</p>
                                         <p style={{ fontSize: '1.8rem', fontWeight: '700', color: '#27ae60', margin: '0' }}>
-                                            ${stats.totalDeposits.toFixed(2)}
+                                            ₹{stats.totalDeposits.toFixed(2)}
                                         </p>
                                     </div>
                                 </div>
@@ -299,7 +299,7 @@ function UserDashboard() {
                                     <div className="card-body p-3">
                                         <p className="text-muted mb-2" style={{ fontSize: '0.9rem' }}>📉 Total Withdrawals</p>
                                         <p style={{ fontSize: '1.8rem', fontWeight: '700', color: '#e74c3c', margin: '0' }}>
-                                            ${stats.totalWithdrawals.toFixed(2)}
+                                            ₹{stats.totalWithdrawals.toFixed(2)}
                                         </p>
                                     </div>
                                 </div>
