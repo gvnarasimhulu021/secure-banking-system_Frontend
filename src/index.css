@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 18px;
+}
+
+/* Increase base font sizes for better readability */
+.text-xs {
+  font-size: 0.9rem !important;
+}
+
+.text-sm {
+  font-size: 1rem !important;
+}
+
+.text-base {
+  font-size: 1.125rem !important;
+}
+
+.text-lg {
+  font-size: 1.375rem !important;
+}
+
+.text-xl {
+  font-size: 1.5rem !important;
+}
+
+.text-2xl {
+  font-size: 1.75rem !important;
+}
+
+/* Increase specific component font sizes */
+.text-\[10px\] {
+  font-size: 0.75rem !important;
+}
+
+.text-\[11px\] {
+  font-size: 0.875rem !important;
+}
+
+.text-\[12px\] {
+  font-size: 1rem !important;
+}
+
+.text-\[13px\] {
+  font-size: 1.125rem !important;
+}
+
+.text-\[14px\] {
+  font-size: 1.25rem !important;
+}
+
+.text-\[15px\] {
+  font-size: 1.375rem !important;
+}
+
+.text-\[16px\] {
+  font-size: 1.5rem !important;
+}
+
+.text-\[18px\] {
+  font-size: 1.75rem !important;
+}
+
+.text-\[20px\] {
+  font-size: 2rem !important;
+}
+
+.text-\[22px\] {
+  font-size: 2.25rem !important;
+}
+
+/* Minimal Effects - Only Essential Hover States */
+
+/* Simple button hover effects */
+button {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+button:hover {
+  /* Only color changes, no movement */
+}
+
+/* Simple input focus effects */
+input:focus, textarea:focus, select:focus {
+  outline: 2px solid #22c55e;
+  outline-offset: 2px;
+}
+
+/* Card hover effects - minimal */
+.rounded-card {
+  transition: box-shadow 0.2s ease;
+}
+
+.rounded-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Stylish Logout Button */
+.logout-button {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2);
+}
+
+.logout-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.logout-button:hover::before {
+  left: 100%;
+}
+
+.logout-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3);
+}
+
+.logout-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(239, 68, 68, 0.2);
+}
+
+/* Simple sidebar hover effects */
+.sidebar-item {
+  transition: background-color 0.2s ease;
+}
+
+.sidebar-item:hover {
+  background-color: rgba(34, 197, 94, 0.05);
+}
+
+/* Simple transaction row hover */
+.transaction-row:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
